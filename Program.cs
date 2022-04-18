@@ -6,7 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddSignalR();
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", 
 builder => {
-    builder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4201").AllowCredentials();
+    builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyHeader().AllowAnyMethod();
 }));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -22,14 +22,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
 app.UseCors("CorsPolicy");
 
-app.MapControllers();
-app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllers();
     endpoints.MapHub<ChatSignalR.Hubs.ChatHub>("/chatsocket");
 
 });
