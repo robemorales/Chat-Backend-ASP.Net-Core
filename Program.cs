@@ -6,7 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddSignalR();
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", 
 builder => {
-    builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyHeader().AllowAnyMethod();
+    builder.WithOrigins("https://publicwebchat.netlify.app").AllowCredentials().AllowAnyHeader().AllowAnyMethod();
 }));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
